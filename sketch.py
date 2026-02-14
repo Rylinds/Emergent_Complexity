@@ -27,11 +27,12 @@ class RadialNoiseSketch(vsketch.SketchClass):
     (more 'bumps' around each ring; hardcoded).
     '''
 
-    radius = vsketch.Param(0.200)
+    # play round with adjusting these numbers for fun topo visuals
+    radius = vsketch.Param(0.4)
     points = vsketch.Param(360)
-    layers = vsketch.Param(10)
+    layers = vsketch.Param(45)
 
-    noise_scale = vsketch.Param(0.001)
+    noise_scale = vsketch.Param(0.01)
     noise_offset = vsketch.Param(10)
 
     def draw(self, vsk: vsketch.Vsketch) -> None:
@@ -45,7 +46,7 @@ class RadialNoiseSketch(vsketch.SketchClass):
                 angle = point * math.pi / 180
 
                 n_layer = layer * self.noise_scale
-                n_x = (self.noise_offset + math.cos(angle)) * self.noise_scale * 100
+                n_x = (self.noise_offset + math.cos(angle)) * self.noise_scale * 134
                 n_y = (self.noise_offset + math.sin(angle)) * self.noise_scale * 100
                 noise = vsk.noise(n_layer, n_x, n_y)
 
@@ -59,5 +60,5 @@ class RadialNoiseSketch(vsketch.SketchClass):
     def finalize(self, vsk: vsketch.Vsketch) -> None:
         vsk.vpype('linemerge linesimplify reloop linesort')
 
-#if __name__ == '__main__':
-   #RadialNoiseSketch.display()
+if __name__ == '__main__':
+   RadialNoiseSketch.display()

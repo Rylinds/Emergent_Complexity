@@ -61,4 +61,4 @@ class RadialNoiseSketch(vsketch.SketchClass):
         vsk.vpype('linemerge linesimplify reloop linesort')
 
 if __name__ == '__main__':
-   RadialNoiseSketch.display()
+    RadialNoiseSketch.display()
